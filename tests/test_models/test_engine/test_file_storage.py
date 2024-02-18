@@ -1,19 +1,16 @@
 #!/usr/bin/python3
-""" Module for testing file storage"""
+""" let test our module for testing file storage"""
 import unittest
 from models.base_model import BaseModel
 from models import storage
 import os
 
 
-@unittest.skipIf(
-       os.getenv('HBNB_TYPE_STORAGE') == 'db',
-       "This test will only work in Filestorage")
 class test_fileStorage(unittest.TestCase):
-    """ Class to test the file storage method """
+    """ let test the file storage method """
 
     def setUp(self):
-        """ Set up test environment """
+        """ let the value check Set up test env """
         del_list = []
         for key in storage._FileStorage__objects.keys():
             del_list.append(key)
@@ -21,18 +18,18 @@ class test_fileStorage(unittest.TestCase):
             del storage._FileStorage__objects[key]
 
     def tearDown(self):
-        """ Remove storage file at end of tests """
+        """ let through the  storage file at the end of file """
         try:
             os.remove('file.json')
         except:
             pass
 
     def test_obj_list_empty(self):
-        """ __objects is initially empty """
+        """ let check the teste theobjects empty """
         self.assertEqual(len(storage.all()), 0)
 
     def test_new(self):
-        """ New object is correctly added to __objects """
+        """ let check the object is add objects """
         new = BaseModel()
         for obj in storage.all().values():
             temp = obj
@@ -106,7 +103,7 @@ class test_fileStorage(unittest.TestCase):
         self.assertEqual(temp, 'BaseModel' + '.' + _id)
 
     def test_storage_var_created(self):
-        """ FileStorage object storage created """
+        """ let test the storage created by file """
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
